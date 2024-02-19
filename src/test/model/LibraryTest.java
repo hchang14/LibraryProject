@@ -56,7 +56,7 @@ public class LibraryTest {
         library.addBook(book2);
         library.addBook(book3);
         assertEquals("Title: Happy Hour, Author: Jennifer, Category: Humor\n", library.bookCategory("Humor"));
-        assertTrue(library.bookCategory("Thriller").contains("Title: Sad Time in Paris, Author: Jennifer, Category: Thriller\n" + "Title: Golden feet, Author: Hao, Category: Thriller"), library.bookCategory("Thriller"));
+        assertTrue(library.bookCategory("Thriller").contains("Title: Sad Time in Paris, Author: Jennifer, Category: Thriller\n" + "Title: Golden feet, Author: Hao, Category: Thriller"));
 //        assertEquals("Title: Sad Time in Paris, Author: Jennifer, Category: Thriller", library.bookCategory("Thriller"));
 //        assertEquals("Title: Golden feet, Author: Hao, Category: Thriller", library.bookCategory("Thriller"));
     }
@@ -97,9 +97,9 @@ public class LibraryTest {
     @Test
     public void testGetAllBookSuccessfully() {
         library.addBook(book1);
-        assertTrue(library.getAllBook().contains("Title: Happy Hour, Author: Jennifer, Category: Humor"),library.getAllBook());
+        assertTrue(library.getAllBook().contains("Title: Happy Hour, Author: Jennifer, Category: Humor"));
         library.addBook(book2);
-        assertTrue(library.getAllBook().contains("Title: Happy Hour, Author: Jennifer, Category: Humor\n" + "Title: Sad Time in Paris, Author: Jennifer, Category: Thriller"),library.getAllBook());
+        assertTrue(library.getAllBook().contains("Title: Happy Hour, Author: Jennifer, Category: Humor\n" + "Title: Sad Time in Paris, Author: Jennifer, Category: Thriller"));
     }
     @Test
     public void testGetAllBookUnSuccessfully() {
