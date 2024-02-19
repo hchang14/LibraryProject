@@ -43,6 +43,8 @@ public class LibraryTest {
 
     @Test
     public void testRemoveBookUnSuccessfully() {
+        library.addBook(book1);
+        library.addBook(book2);
         assertFalse(library.removeBook("Chill hour"));
         assertFalse(library.removeBook("Sad Time in China"));
         assertFalse(library.removeBook("Golden feet"));
