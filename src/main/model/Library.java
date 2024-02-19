@@ -85,6 +85,10 @@ public class Library {
         }
         return bookName;
     }
+
+    public List<Book> getBook() {
+        return bookList;
+    }
 }
 
         //EFFECTS: Get the number of books which have been borrowed
