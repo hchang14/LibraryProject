@@ -1,23 +1,33 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+import model.Library;
+
 import java.util.ArrayList;
 import java.util.List;
 
-//Library class manages the collection of books
-public class Library {
+//EFFECTS: Library class manages the collection of books
+public class Library implements Writable {
     private List<Book> bookList;
 
+    //EFFECTS: Initialize an empty arrayList
+    //MODIFIES: this
     public Library() {
-        bookList = new ArrayList<>();
+        this.bookList = new ArrayList<>();
     }
 
+    //REQUIRES: !bookList.contains() the book we are trying to add
     //EFFECTS: Adds a new book to library's collection
     //MODIFIES: this
     public void addBook(Book book) {
         bookList.add(book);
     }
 
+    //REQUIRES: bookList.contains() the book we are trying to remove
     //EFFECTS: remove a book from the library's collection
+    //MODIFIES: this
     public boolean removeBook(String name) {
         for (Book book : bookList) {
             if (book.getName().equals(name)) {
@@ -28,7 +38,9 @@ public class Library {
         return false;
     }
 
+    //REQUIRES: bookList.contains() the book category we are trying to search
     //EFFECTS: Search book(s) from the library's collection with specific category
+    //MODIFIES: this
     public String bookCategory(String category) {
         String bookCategory = "";
         for (Book book : bookList) {
@@ -42,7 +54,9 @@ public class Library {
         return bookCategory;
     }
 
-    //EFFECTS: remove a book from the library's collection
+    //REQUIRES: bookList.contains() the author we are trying to search
+    //EFFECTS: Search book(s) from the library's collection with specific author
+    //MODIFIES: this
     public String bookAuthor(String author) {
         String bookAuthor = "";
         for (Book book : bookList) {
@@ -89,17 +103,24 @@ public class Library {
     public List<Book> getBook() {
         return bookList;
     }
-}
 
-        //EFFECTS: Get the number of books which have been borrowed
-//    public int getBorrowedBook() {
-//        int borrowedCount = 0;
-//        for (Book book : bookList) {
-//            if (!book.isAvailable()) {
-//                borrowedCount++;
-//            }
-//        }
-//        return borrowedCount;
-//    }
-//}
+    //EFFECTS: return the library as a JSON Object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("books", booksToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this log collection as a JSON array
+    private JSONArray booksToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Book book : this.bookList) {
+            jsonArray.put(book.toJson());
+        }
+
+        return jsonArray;
+    }
+}
 

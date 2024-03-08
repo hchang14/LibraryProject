@@ -20,3 +20,5 @@ This project is of interest to me as it combines my passion for Java programming
 - As a user, I want to be able to view book(s) with a specific category, so that user can assist patrons in finding books they are interested in.
 - As a user, I want to be able to view book(s) with a specific author, so that user can assist patrons in finding books they are interested in.
 - As a user, I want to be able to remove a book from the library's collection, so that outdated or damaged books can be taken out of circulation.
+- As a user, I want to be able to be given the option to save my library list to file.
+- As a user, I want to be able to be given the option to load my library list from file when I start the application.
