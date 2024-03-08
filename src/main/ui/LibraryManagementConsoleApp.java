@@ -140,35 +140,6 @@ public class LibraryManagementConsoleApp {
         }
     }
 
-//    public void inputCase4() {
-//        System.out.println("Total Books: " + library.getTotalBookNum());
-//    }
-
-//    public void inputCase5() {
-//        System.out.println("Borrowed Books: " + library.getBorrowedBook());
-//    }
-//
-//    public void inputCase6() {
-//        System.out.print("Enter title of book to borrow: ");
-//        String titleToBorrow = scanner.nextLine();
-//        boolean check = library.borrowBook(titleToBorrow);
-//        if (check == true) {
-//            System.out.println("Book borrowed successfully");
-//        } else {
-//            System.out.println("Book is not found, borrowed unsuccessfully");
-//        }
-//    }
-
-    //    public void inputCase7() {
-//        System.out.print("Enter title of book to borrow: ");
-//        String titleToBorrow = scanner.nextLine();
-//        boolean check = library.borrowBook(titleToBorrow);
-//        if (check == true) {
-//            System.out.println("Book returned successfully");
-//        } else {
-//            System.out.println("Book is not found, returned unsuccessfully");
-//        }
-//    }
     // REQUIRES: App is running.
     // MODIFIES: this, library
     // EFFECTS: Reads user input for viewing books of specific category and prints them.

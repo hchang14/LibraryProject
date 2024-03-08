@@ -45,8 +45,8 @@ public class JsonWriterTest extends JsonTest {
     void testWriterGeneralLibrary() {
         try {
             Library lb = new Library();
-            lb.addBook(new Book("Mathematics","Tanojo","Romantic"));
-            lb.addBook(new Book("Man in Black","Hao","Action"));
+            lb.addBook(new Book("Mathematics", "Tanojo", "Romantic"));
+            lb.addBook(new Book("Man in Black", "Hao", "Action"));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralLibrary.json");
             writer.open();
             writer.write(lb);
@@ -56,8 +56,8 @@ public class JsonWriterTest extends JsonTest {
             lb = reader.read();
             List<Book> books = lb.getBook();
             assertEquals(2, books.size());
-            checkBook(books.get(0), "Mathematics","Tanojo","Romantic");
-            checkBook(books.get(1), "Man in Black","Hao","Action");
+            checkBook(books.get(0), "Mathematics", "Tanojo", "Romantic");
+            checkBook(books.get(1), "Man in Black", "Hao", "Action");
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

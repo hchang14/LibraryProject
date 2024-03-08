@@ -70,24 +70,13 @@ public class Library implements Writable {
         return bookAuthor;
     }
 
-    //EFFECTS: View the list of all books currently available in the library
-//    public String viewAvailableBooks() {
-//        String bookAvailable = "";
-//        for (Book book : bookList) {
-//            if (book.isAvailable()) {
-//                bookAvailable += book.toString() + "\n";
-//            } else {
-//                bookAvailable += "Unfortunately, no book is available right now.";
-//            }
-//        }
-//        return bookAvailable;
-//    }
 
     //EFFECTS: View the total number of books in the library's collection
     public int getTotalBookNum() {
         return bookList.size();
     }
 
+    //EFFECTS: return the String type of books in the library
     public String getAllBook() {
         String bookName = "";
         if (!bookList.isEmpty()) {
@@ -100,6 +89,7 @@ public class Library implements Writable {
         return bookName;
     }
 
+    //EFFECTS: get the list of books in the library
     public List<Book> getBook() {
         return bookList;
     }

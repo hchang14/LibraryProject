@@ -8,14 +8,13 @@ public class Book implements Writable {
     private String name;
     private String author;
     private String category;
-    //private boolean available;
+
 
     //Constructs the book(name, author, category)
     public Book(String name, String author, String category) {
         this.name = name;
         this.author = author;
         this.category = category;
-        //this.available = true; // Initial the book as available
     }
 
 
@@ -31,23 +30,7 @@ public class Book implements Writable {
         return this.category;
     }
 
-//    public boolean isAvailable() {
-//        return this.available;
-//    }
-
-    //EFFECTS: Marks the book as borrowed
-    //MODIFIES: this
-//    public void borrowBook() {
-//        this.available = false;
-//    }
-
-    //EFFECTS: Marks the book as borrowed
-//    //MODIFIES: this
-//    public void returnBook() {
-//        this.available = true;
-//    }
-
-//EFFECTS: return the string type of the book description
+    //EFFECTS: return the string type of the book description
     public String toString() {
         return "Title: " + this.name + ", Author: " + this.author + ", Category: " + this.category;
     }
