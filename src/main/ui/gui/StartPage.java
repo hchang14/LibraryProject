@@ -23,7 +23,7 @@ public class StartPage extends JFrame implements ActionListener {
     private JsonReader jsonReader;
     private JButton button1;
     private JButton button2;
-    private AddBook add;
+    //    private AddBook add;
     private ImageIcon logo;
     private Image splashLogo;
     private JLabel backgroundLabel;
@@ -40,13 +40,14 @@ public class StartPage extends JFrame implements ActionListener {
 
         JLabel label = new JLabel("<html>Welcome!<br>Do you have any saved books?</html>");
         label.setBounds(f.getWidth() / 4, f.getHeight() / 9, 300, 100);
+        label.setBackground(Color.LIGHT_GRAY);
         Font font = new Font("Arial", Font.BOLD, 20);
         label.setFont(font);
 
-//        backgroundLabel = new JLabel();
-//        backgroundLabel.setBounds(0, 0, f.getWidth(), f.getHeight());
-//        image();
-//        backgroundLabel.setIcon(new ImageIcon(splashLogo)); // 设置图片
+        backgroundLabel = new JLabel();
+        backgroundLabel.setBounds(0, 0, f.getWidth(), f.getHeight());
+        image();
+        backgroundLabel.setIcon(new ImageIcon(splashLogo));
 
 
         button1 = new JButton("Yes, load data");
@@ -62,21 +63,21 @@ public class StartPage extends JFrame implements ActionListener {
         f.add(button1);
         f.add(button2);
         f.setVisible(true);
-        //f.add(backgroundLabel);
+        f.add(backgroundLabel);
     }
 
-//    public void image() {
-//        logo = new ImageIcon("data/background.png");
-//        splashLogo = logo.getImage().getScaledInstance(f.getWidth(), f.getHeight(), Image.SCALE_DEFAULT); // 设置图片大小为窗口大小
-//    }
+    public void image() {
+        logo = new ImageIcon("data/background.JPG");
+        splashLogo = logo.getImage().getScaledInstance(f.getWidth(), f.getHeight(), Image.SCALE_DEFAULT); // 设置图片大小为窗口大小
+    }
 
     // EFFECTS: goes to new JFrame page based on user input
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button1) {
             try {
-                jsonReader = new JsonReader(JSON_STORE);
-                library = jsonReader.read();
+//                jsonReader = new JsonReader(JSON_STORE);
+//                library = jsonReader.read();
 
                 // Close the StartPage window
                 this.dispose();
