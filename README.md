@@ -22,3 +22,12 @@ This project is of interest to me as it combines my passion for Java programming
 - As a user, I want to be able to remove a book from the library's collection, so that outdated or damaged books can be taken out of circulation.
 - As a user, I want to be able to be given the option to save my library list to file.
 - As a user, I want to be able to be given the option to load my library list from file when I start the application.
+
+## Instructions for Grader
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the "Add a new book" button in the homepage11. 
+For those who didn't load data, you can do so by clicking the "Add a new book" button in the homepage2 class
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking the "Remove existing book(s)" button in the homepage11.
+- You can locate my visual component by running the application, it is in the start page.
+- By clicking the "Quit" button, a warning box will appear.
+You can save the data of my library by clicking the "Yes" button in that box.
+- You can reload the data of your library by clicking the "Yes, load data" button at the start page.
