@@ -5,13 +5,9 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
-import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // MODIFIES: this
@@ -27,48 +23,52 @@ public class StartPage extends JFrame implements ActionListener {
     private ImageIcon logo;
     private Image splashLogo;
     private JLabel backgroundLabel;
-    private JFrame f;
+    private JFrame frame;
 
 
     public StartPage() {
-        f = new JFrame();
-        f.setBounds(500, 100, 600, 400);
-        f.setTitle("Book Management App");
-        f.setAlwaysOnTop(true);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setLayout(null); // Set layout to null for absolute positioning
+        frame = new JFrame();
+        frame.setBounds(500, 100, 600, 400);
+        frame.setTitle("Book Management App");
+        frame.setAlwaysOnTop(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(null); // Set layout to null for absolute positioning
 
-        JLabel label = new JLabel("<html>Welcome!<br>Do you have any saved books?</html>");
-        label.setBounds(f.getWidth() / 4, f.getHeight() / 9, 300, 100);
-        label.setBackground(Color.LIGHT_GRAY);
-        Font font = new Font("Arial", Font.BOLD, 20);
-        label.setFont(font);
-
-        backgroundLabel = new JLabel();
-        backgroundLabel.setBounds(0, 0, f.getWidth(), f.getHeight());
         image();
+        //ImageIcon homeLogo = new ImageIcon(splashLogo);
         backgroundLabel.setIcon(new ImageIcon(splashLogo));
 
+        JLabel label = new JLabel("<html>Welcome!<br>Do you have any saved books?</html>");
+        label.setBounds(frame.getWidth() / 10, frame.getHeight() / 11, 500, 200);
 
-        button1 = new JButton("Yes, load data");
-        button1.setBounds(f.getWidth() / 4, 1 * f.getHeight() / 2, f.getWidth() / 2, 50);
-        button1.addActionListener(this);
+        label.setForeground(Color.GREEN);
+        Font font = new Font("Arial", Font.BOLD, 33);
+        label.setFont(font);
+
+        button1();
 
         button2 = new JButton("No, add a new book");
-        button2.setBounds(f.getWidth() / 4, 7 * f.getHeight() / 10, f.getWidth() / 2, 50);
+        button2.setBounds(frame.getWidth() / 4, 7 * frame.getHeight() / 10, frame.getWidth() / 2, 50);
         button2.addActionListener(this);
 
+        frame.add(label);
+        frame.add(button1);
+        frame.add(button2);
+        frame.setVisible(true);
+        frame.add(backgroundLabel);
+    }
 
-        f.add(label);
-        f.add(button1);
-        f.add(button2);
-        f.setVisible(true);
-        f.add(backgroundLabel);
+    public void button1() {
+        button1 = new JButton("Yes, load data");
+        button1.setBounds(frame.getWidth() / 4, 1 * frame.getHeight() / 2, frame.getWidth() / 2, 50);
+        button1.addActionListener(this);
     }
 
     public void image() {
+        backgroundLabel = new JLabel();
+        backgroundLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
         logo = new ImageIcon("data/background.JPG");
-        splashLogo = logo.getImage().getScaledInstance(f.getWidth(), f.getHeight(), Image.SCALE_DEFAULT); // 设置图片大小为窗口大小
+        splashLogo = logo.getImage().getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT); // 设置图片大小为窗口大小
     }
 
     // EFFECTS: goes to new JFrame page based on user input
