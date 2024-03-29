@@ -48,7 +48,8 @@ public class StartPage extends JFrame implements ActionListener {
         button1();
 
         button2 = new JButton("No, add a new book");
-        button2.setBounds(frame.getWidth() / 4, 7 * frame.getHeight() / 10, frame.getWidth() / 2, 50);
+        button2.setBounds(frame.getWidth() / 4, 7 * frame.getHeight() / 10,
+                frame.getWidth() / 2, 50);
         button2.addActionListener(this);
 
         frame.add(label);
