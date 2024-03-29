@@ -38,7 +38,7 @@ public class AddBook extends JFrame implements ActionListener {
         this.setAlwaysOnTop(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Use BoxLayout with Y_AXIS orientation
-        // this.setPreferredSize(new Dimension(600, 400));
+       // this.setPreferredSize(new Dimension(600, 400));
 
         JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Center-align components in each panel
         setBookName(p1);
@@ -116,7 +116,7 @@ public class AddBook extends JFrame implements ActionListener {
         }
     }
 
-    //EFFECTS: return the data for the Jtable
+    //EFFECTS: return the data for the
     public String[] getBookData() {
         String[] data = {text1.getText(), text2.getText(), text3.getText()};
         return data;

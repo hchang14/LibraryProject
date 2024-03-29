@@ -43,10 +43,10 @@ public class StartPage extends JFrame implements ActionListener {
         Font font = new Font("Arial", Font.BOLD, 20);
         label.setFont(font);
 
-        backgroundLabel = new JLabel();
-        backgroundLabel.setBounds(0, 0, f.getWidth(), f.getHeight());
-        image();
-        backgroundLabel.setIcon(new ImageIcon(splashLogo)); // 设置图片
+//        backgroundLabel = new JLabel();
+//        backgroundLabel.setBounds(0, 0, f.getWidth(), f.getHeight());
+//        image();
+//        backgroundLabel.setIcon(new ImageIcon(splashLogo)); // 设置图片
 
 
         button1 = new JButton("Yes, load data");
@@ -65,10 +65,10 @@ public class StartPage extends JFrame implements ActionListener {
         f.add(backgroundLabel);
     }
 
-    public void image() {
-        logo = new ImageIcon("data/background.png");
-        splashLogo = logo.getImage().getScaledInstance(f.getWidth(), f.getHeight(), Image.SCALE_DEFAULT); // 设置图片大小为窗口大小
-    }
+//    public void image() {
+//        logo = new ImageIcon("data/background.png");
+//        splashLogo = logo.getImage().getScaledInstance(f.getWidth(), f.getHeight(), Image.SCALE_DEFAULT); // 设置图片大小为窗口大小
+//    }
 
     // EFFECTS: goes to new JFrame page based on user input
     @Override
@@ -81,8 +81,8 @@ public class StartPage extends JFrame implements ActionListener {
                 // Close the StartPage window
                 this.dispose();
 
-                // Create HomePage1 with loaded library
-                new HomePage1(library);
+                // Create HomePage0 with loaded library
+                new HomePage0(library);
             } catch (IOException exp) {
                 throw new RuntimeException(exp);
             }
