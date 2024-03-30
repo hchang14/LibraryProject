@@ -15,8 +15,6 @@ import javax.swing.table.DefaultTableModel;
 //Represents the page where users can add new books to the library.
 // * Users can add a new book to the library.
 public class AddBook extends JFrame implements ActionListener {
-    //    private HomePage1 home1;
-//    private HomePage2 home2;
     private Book book;
     private Library library;
     private JLabel name1 = new JLabel("Book's Name: ");
@@ -30,15 +28,14 @@ public class AddBook extends JFrame implements ActionListener {
 
     //     * Constructs the add book page.
     public AddBook() {
-//        this.library = library;
-//        this.tableModel = tableModel;
+        this.library = library;
         this.setBounds(500, 100, 600, 400);
         this.setTitle("Book Management App");
         this.setBackground(Color.LIGHT_GRAY);
         this.setAlwaysOnTop(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Use BoxLayout with Y_AXIS orientation
-       // this.setPreferredSize(new Dimension(600, 400));
+        // this.setPreferredSize(new Dimension(600, 400));
 
         JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Center-align components in each panel
         setBookName(p1);
@@ -96,12 +93,12 @@ public class AddBook extends JFrame implements ActionListener {
         String name = text1.getText();
         String author = text2.getText();
         String category = text3.getText();
-        book = new Book(name, author, category);
+
         // Regular expression to allow only letters and spaces
         String regex = "^[a-zA-Z\\s]+$";
-        if (!name.isEmpty() && !author.isEmpty() && !category.isEmpty() &&
-                name.matches(regex) && author.matches(regex) && category.matches(regex)) {
-            Book book = new Book(name, author, category);
+        if (!name.isEmpty() && !author.isEmpty() && !category.isEmpty()
+                && name.matches(regex) && author.matches(regex) && category.matches(regex)) {
+            book = new Book(name, author, category);
             library.addBook(book); // Add the book to the library
             // Show a success message
             JOptionPane.showMessageDialog(this, "Book added successfully.");
@@ -116,11 +113,6 @@ public class AddBook extends JFrame implements ActionListener {
         }
     }
 
-    //EFFECTS: return the data for the
-    public String[] getBookData() {
-        String[] data = {text1.getText(), text2.getText(), text3.getText()};
-        return data;
-    }
 
 
     @Override

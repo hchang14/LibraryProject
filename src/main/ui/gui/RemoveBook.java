@@ -89,11 +89,12 @@ public class RemoveBook extends JFrame implements ActionListener {
         String name = text1.getText();
         String author = text2.getText();
         String category = text3.getText();
+
         // Regular expression to allow only letters and spaces
         String regex = "^[a-zA-Z\\s]+$";
-        if (!name.isEmpty() && !author.isEmpty() && !category.isEmpty() &&
-                name.matches(regex) && author.matches(regex) && category.matches(regex)) {
-            Book book = new Book(name, author, category);
+        if (!name.isEmpty() && !author.isEmpty() && !category.isEmpty()
+                && name.matches(regex) && author.matches(regex) && category.matches(regex)) {
+            book = new Book(name, author, category);
             library.removeBook(name);
             // Show a success message
             JOptionPane.showMessageDialog(this, "Book added successfully.");

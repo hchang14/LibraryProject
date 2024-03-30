@@ -7,7 +7,6 @@ import persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +14,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,9 +28,9 @@ public class HomePage0 extends JFrame implements ActionListener {
     private JButton addButton;
     private JButton removeButton;
     private ImageIcon logo;
-    private AddBook add;
     private JTable table;
-    private DefaultTableModel tableModel;
+    private JFrame frame;
+    private DefaultTableModel model;
     private static javax.swing.JTable jTable;
 
     private Map<Integer, List<Integer>> date = new LinkedHashMap<>();
@@ -41,15 +39,15 @@ public class HomePage0 extends JFrame implements ActionListener {
     public HomePage0(Library library) throws IOException {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        this.add = new AddBook();
-        JFrame f = new JFrame();
-        this.library = jsonReader.read();
-        //f.setBounds(500, 100, 600, 700);
-        f.setTitle("Book Management App");
-        f.setBackground(Color.LIGHT_GRAY);
-        f.setAlwaysOnTop(true);
-        f.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        this.setPreferredSize(new Dimension(600, 500));
+        frame = new JFrame();
+        addButton = new JButton("Add a new data");
+
+        this.library = library;
+        frame.setTitle("Book Management App");
+        frame.setBackground(Color.LIGHT_GRAY);
+        frame.setAlwaysOnTop(true);
+        frame.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        this.setSize(600, 500);
 
         JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Center-align components in each panel
         setMotto(p1);
@@ -61,28 +59,23 @@ public class HomePage0 extends JFrame implements ActionListener {
         JPanel p4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         setRemoveButton(p4);
 
-        JPanel p5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        displayTable(p5);
+        //JPanel p5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        displayTable(book, model);
 
-        this.setSize(600, 600);
-//        this.add(p1); // Add panels to the frame
-//        this.add(p2);
-//        this.add(p3);
-//        this.add(p4);
-//        this.add(p5);
-        //displayTable();
-        this.setVisible(true);
-        save(f);
+
+        save(frame);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     private void setMotto(JPanel p) {
         JLabel label1 = new JLabel("<html>Keep reading Keep running");
         label1.setPreferredSize(new Dimension(200, 30));
-        //label1.setBounds(p.getWidth() / 10, p.getHeight() / 30, 700, 300);
+
         Font font1 = new Font("Arial", Font.ITALIC, 25);
         label1.setForeground(Color.ORANGE);
         label1.setFont(font1);
-        label1.setPreferredSize(new Dimension(200, 40));
+        // label1.setPreferredSize(new Dimension(200, 40));
         p.add(label1);
         this.add(p);
     }
@@ -97,8 +90,6 @@ public class HomePage0 extends JFrame implements ActionListener {
     }
 
     private void setAddButton(JPanel p) {
-        addButton = new JButton("Add a new data");
-        //addButton.setBounds(p.getWidth() / 4, 1 * p.getHeight() / 4, p.getWidth() / 2, 50);
         addButton.addActionListener(this);
         p.add(addButton);
         this.add(p);
@@ -106,24 +97,38 @@ public class HomePage0 extends JFrame implements ActionListener {
 
     private void setRemoveButton(JPanel p) {
         removeButton = new JButton("remove existing book(s)");
-        //removeButton.setBounds(p.getWidth() / 4, 3 * p.getHeight() / 8, p.getWidth() / 2, 50);
         removeButton.addActionListener(this);
         p.add(removeButton);
         this.add(p);
     }
 
-    public void displayTable(JPanel p) {
-        String[] bookData = add.getBookData();
+    //EFFECTS: display the books in the terms of table
+    public void displayTable(Book book, DefaultTableModel model) {
+        String bookCategory = book.getCategory();
+        String bookName = book.getName();
+        String bookAuthor = book.getAuthor();
 
+        String[] rowData = {bookName, bookCategory, bookAuthor};
+        model.addRow(rowData);
+    }
+
+    //EFFECTS: set the table and show the books anf add scroll  pane
+    public void setTable() {
         // Populate the table with book data
         String[] columnNames = {"Book's Name", "Book's Author", "Book's Category"};
-        Object[][] rowData = {bookData}; // Assuming bookData is an array with length 3
-        tableModel = new DefaultTableModel(rowData, columnNames);
-        table = new JTable(tableModel);
+        table = new JTable(model);
+        model.addColumn(columnNames[0]);
+        model.addColumn(columnNames[1]);
+        model.addColumn(columnNames[2]);
+        model.addRow(columnNames);
 
+        for (Book b : library.getBook()) {
+            displayTable(b, model);
+        }
+
+        JPanel p = new JPanel(new GridLayout(2, 1));
         // Create a JScrollPane and add the table to it
         JScrollPane scrollPane = new JScrollPane(table);
-        //scrollPane.setBounds(getWidth() / 4, getHeight() / 3, getWidth() / 2, 100);
 
         // Add the JScrollPane to the panel
         p.add(scrollPane);
@@ -224,7 +229,8 @@ public class HomePage0 extends JFrame implements ActionListener {
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                int value = JOptionPane.showConfirmDialog(f, "Do you want to save your data before quitting?", "Warning", JOptionPane.YES_NO_OPTION);
+                int value = JOptionPane.showConfirmDialog(f,
+                        "Do you want to save your data before quitting?", "Warning", JOptionPane.YES_NO_OPTION);
                 if (value == JOptionPane.OK_OPTION) {
                     saveData();
                     System.exit(0); // Quit the application after saving data
@@ -243,6 +249,7 @@ public class HomePage0 extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ex) {
         if (ex.getSource() == addButton) {
             new AddBook();
+            // addBookFrame.setVisible(true);
         }
         if (ex.getSource() == removeButton) {
             new RemoveBook();
