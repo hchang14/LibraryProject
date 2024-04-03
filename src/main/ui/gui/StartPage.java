@@ -82,14 +82,10 @@ public class StartPage extends JFrame implements ActionListener {
             try {
                 jsonReader = new JsonReader(JSON_STORE);
                 library = jsonReader.read();
-
-                // Close the StartPage window
                 this.dispose();
-
-                // Create HomePage0 with loaded library
                 new HomePage0(library);
-            } catch (IOException exp) {
-                throw new RuntimeException(exp);
+            } catch (Exception exp) {
+                exp.printStackTrace(); // 这将帮助你了解是否有异常发生
             }
         } else if (e.getSource() == button2) {
             this.dispose();

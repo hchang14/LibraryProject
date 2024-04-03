@@ -39,13 +39,13 @@ public class HomePage0 extends JFrame implements ActionListener {
     public HomePage0(Library library) throws IOException {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        frame = new JFrame();
         addButton = new JButton("Add a new data");
 
         this.library = library;
         frame.setTitle("Book Management App");
         frame.setBackground(Color.LIGHT_GRAY);
         frame.setAlwaysOnTop(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         this.setSize(600, 500);
 
@@ -60,9 +60,9 @@ public class HomePage0 extends JFrame implements ActionListener {
         setRemoveButton(p4);
 
         //JPanel p5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        displayTable(book, model);
+        //displayTable(book, model);
 
-
+        initTable();
         save(frame);
         frame.pack();
         frame.setVisible(true);
@@ -102,38 +102,57 @@ public class HomePage0 extends JFrame implements ActionListener {
         this.add(p);
     }
 
-    //EFFECTS: display the books in the terms of table
-    public void displayTable(Book book, DefaultTableModel model) {
-        String bookCategory = book.getCategory();
-        String bookName = book.getName();
-        String bookAuthor = book.getAuthor();
-
-        String[] rowData = {bookName, bookCategory, bookAuthor};
-        model.addRow(rowData);
-    }
-
-    //EFFECTS: set the table and show the books anf add scroll  pane
-    public void setTable() {
-        // Populate the table with book data
+    private void initTable() {
         String[] columnNames = {"Book's Name", "Book's Author", "Book's Category"};
+        model = new DefaultTableModel(null, columnNames);
         table = new JTable(model);
-        model.addColumn(columnNames[0]);
-        model.addColumn(columnNames[1]);
-        model.addColumn(columnNames[2]);
-        model.addRow(columnNames);
-
-        for (Book b : library.getBook()) {
-            displayTable(b, model);
-        }
-
-        JPanel p = new JPanel(new GridLayout(2, 1));
-        // Create a JScrollPane and add the table to it
         JScrollPane scrollPane = new JScrollPane(table);
-
-        // Add the JScrollPane to the panel
-        p.add(scrollPane);
-        this.add(p);
+        scrollPane.setBounds(10, 100, 580, 250); // 根据需要调整大小和位置
+        frame.add(scrollPane);
+        updateTable();
     }
+
+    // 更新表格数据的方法
+    private void updateTable() {
+        model.setRowCount(0); // 清除现有数据
+        for (Book book : library.getBook()) {
+            Object[] rowData = {book.getName(), book.getAuthor(), book.getCategory()};
+            model.addRow(rowData);
+        }
+    }
+    //EFFECTS: display the books in the terms of table
+//    public void displayTable(Book book, DefaultTableModel model) {
+//        String bookCategory = book.getCategory();
+//        String bookName = book.getName();
+//        String bookAuthor = book.getAuthor();
+//
+//        String[] rowData = {bookName, bookCategory, bookAuthor};
+//        model.addRow(rowData);
+//    }
+//
+//
+//    //EFFECTS: set the table and show the books anf add scroll  pane
+//    public void setTable() {
+//        // Populate the table with book data
+//        String[] columnNames = {"Book's Name", "Book's Author", "Book's Category"};
+//        table = new JTable(model);
+//        model.addColumn(columnNames[0]);
+//        model.addColumn(columnNames[1]);
+//        model.addColumn(columnNames[2]);
+//        model.addRow(columnNames);
+//
+//        for (Book b : library.getBook()) {
+//            displayTable(b, model);
+//        }
+//
+//        JPanel p = new JPanel(new GridLayout(2, 1));
+//        // Create a JScrollPane and add the table to it
+//        JScrollPane scrollPane = new JScrollPane(table);
+//
+//        // Add the JScrollPane to the panel
+//        p.add(scrollPane);
+//        this.add(p);
+//    }
 
 //
 //    private void setTable(JPanel p) {
