@@ -53,6 +53,22 @@ public class LibraryTest {
         assertFalse(library.removeBook("Golden feet"));
     }
 
+    @Test
+    public void testRemoveNonExistentBook() {
+        assertFalse(library.removeBook("Non-Existent Book"));
+    }
+
+    @Test
+    public void testChangeListenerTriggeredOnRemove() {
+        final boolean[] listenerCalled = {false};
+        Runnable changeListener = () -> listenerCalled[0] = true;
+        library.setChangeListener(changeListener);
+        library.addBook(book1);
+
+        library.removeBook(book1.getName());
+        assertTrue(listenerCalled[0]);
+    }
+
 
     @Test
     public void testBookCategorySuccessfully() {
@@ -110,10 +126,24 @@ public class LibraryTest {
     }
 
     @Test
-    public void testGetBooksCategoryCount() {
+    public void testGetBooksCategoryCountMultipleBooksSameCategory() {
+        // Assuming book1 and book2 are of the same category "Thriller"
+        library.addBook(book1);
+        library.addBook(book2);
         Map<String, Double> categoryCount = library.getBooksCategoryCount();
-        assertEquals(Double.valueOf(1), categoryCount.get("Category One"));
-        assertEquals(Double.valueOf(1), categoryCount.get("Category Two"));
+        assertEquals(Double.valueOf(2), categoryCount.get("Thriller"));
+    }
+
+    @Test
+    public void testGetBooksCategoryCountMultipleCategories() {
+        // Assuming book1, book2, and book3 are all of different categories
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        Map<String, Double> categoryCount = library.getBooksCategoryCount();
+        assertEquals(Double.valueOf(1), categoryCount.get(book1.getCategory()));
+        assertEquals(Double.valueOf(1), categoryCount.get(book2.getCategory()));
+        assertEquals(Double.valueOf(1), categoryCount.get(book3.getCategory()));
     }
 
     @Test
