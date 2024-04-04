@@ -150,6 +150,9 @@ public class LibraryTest {
     public void testIsBookExist() {
         library.addBook(book1);
         assertTrue(library.isBookExist(book1));
+        assertEquals("Happy Hour", book1.getName());
+        assertEquals("Jennifer", book1.getAuthor());
+        assertEquals("Humor", book1.getCategory());
         assertFalse(library.isBookExist(new Book("Non-Existent", "Author", "Category")));
     }
 
