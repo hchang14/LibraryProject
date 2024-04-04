@@ -5,7 +5,9 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //EFFECTS: Library class manages the collection of books
 public class Library implements Writable {
@@ -139,6 +141,14 @@ public class Library implements Writable {
         if (changeListener != null) {
             changeListener.run();
         }
+    }
+
+    public Map<String, Double> getBooksCategoryCount() {
+        Map<String, Double> categoryCounts = new HashMap<>();
+        for (Book book : this.bookList) {
+            categoryCounts.merge(book.getCategory(), 1.0, Double::sum);
+        }
+        return categoryCounts;
     }
 }
 

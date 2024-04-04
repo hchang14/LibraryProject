@@ -107,4 +107,3 @@ public class StartPage extends JFrame implements ActionListener {
         new HomePage0(library);
     }
 }
-

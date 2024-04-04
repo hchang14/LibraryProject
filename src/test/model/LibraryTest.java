@@ -5,6 +5,8 @@ import model.Library;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -57,15 +59,13 @@ public class LibraryTest {
         library.addBook(book3);
         assertEquals("Title: Happy Hour, Author: Jennifer, Category: Humor\n", library.bookCategory("Humor"));
         assertTrue(library.bookCategory("Thriller").contains("Title: Sad Time in Paris, Author: Jennifer, Category: Thriller\n" + "Title: Golden feet, Author: Hao, Category: Thriller"));
-//        assertEquals("Title: Sad Time in Paris, Author: Jennifer, Category: Thriller", library.bookCategory("Thriller"));
-//        assertEquals("Title: Golden feet, Author: Hao, Category: Thriller", library.bookCategory("Thriller"));
     }
 
     @Test
     public void testBookCategoryUnSuccessfully() {
-        assertEquals("Unfortunately, no such category book is found.",library.bookCategory("Humor"));
+        assertEquals("Unfortunately, no such category book is found.", library.bookCategory("Humor"));
         library.addBook(book1);
-        assertEquals("Unfortunately, no such category book is found.",library.bookCategory("Thriller"));
+        assertEquals("Unfortunately, no such category book is found.", library.bookCategory("Thriller"));
     }
 
     @Test
@@ -74,24 +74,24 @@ public class LibraryTest {
         library.addBook(book2);
         library.addBook(book3);
         assertTrue(library.bookAuthor("Jennifer").contains("Title: Happy Hour, Author: Jennifer, Category: Humor\n" + "Title: Sad Time in Paris, Author: Jennifer, Category: Thriller"));
-        assertEquals("Title: Golden feet, Author: Hao, Category: Thriller\n",library.bookAuthor("Hao"));
+        assertEquals("Title: Golden feet, Author: Hao, Category: Thriller\n", library.bookAuthor("Hao"));
     }
 
     @Test
     public void testBookAuthorUnSuccessfully() {
-        assertEquals("Unfortunately, we don't have any books written by this author.",library.bookAuthor(""));
+        assertEquals("Unfortunately, we don't have any books written by this author.", library.bookAuthor(""));
         library.addBook(book1);
-        assertEquals("Unfortunately, we don't have any books written by this author.",library.bookAuthor("Hao"));
+        assertEquals("Unfortunately, we don't have any books written by this author.", library.bookAuthor("Hao"));
     }
 
     @Test
     public void testGetTotalBookNum() {
         library.addBook(book1);
-        assertEquals(1,library.getTotalBookNum());
+        assertEquals(1, library.getTotalBookNum());
         library.addBook(book2);
-        assertEquals(2,library.getTotalBookNum());
+        assertEquals(2, library.getTotalBookNum());
         library.addBook(book3);
-        assertEquals(3,library.getTotalBookNum());
+        assertEquals(3, library.getTotalBookNum());
     }
 
     @Test
@@ -101,9 +101,17 @@ public class LibraryTest {
         library.addBook(book2);
         assertTrue(library.getAllBook().contains("Title: Happy Hour, Author: Jennifer, Category: Humor\n" + "Title: Sad Time in Paris, Author: Jennifer, Category: Thriller"));
     }
+
     @Test
     public void testGetAllBookUnSuccessfully() {
-       assertEquals( "No book been added yet", library.getAllBook());
+        assertEquals("No book been added yet", library.getAllBook());
+    }
+
+    @Test
+    public void testGetBooksCategoryCount() {
+        Map<String, Double> categoryCount = library.getBooksCategoryCount();
+        assertEquals(Double.valueOf(1), categoryCount.get("Category One"));
+        assertEquals(Double.valueOf(1), categoryCount.get("Category Two"));
     }
 
 }
