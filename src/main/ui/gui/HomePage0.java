@@ -100,16 +100,16 @@ public class HomePage0 extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: writes data into JSON file or exit based on user input
     private void save() {
-        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE); // 防止默认关闭操作
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 int option = JOptionPane.showConfirmDialog(HomePage0.this,
                         "Do you want to save your data before quitting?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     saveData();
-                    System.exit(0); // 用户选择保存数据后退出程序
+                    System.exit(0);
                 } else if (option == JOptionPane.NO_OPTION) {
-                    System.exit(0); // 用户选择不保存数据后退出程序
+                    System.exit(0);
                 }
             }
         });
