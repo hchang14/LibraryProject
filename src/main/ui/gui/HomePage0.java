@@ -2,7 +2,6 @@ package ui.gui;
 
 import model.Book;
 import model.Library;
-import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;

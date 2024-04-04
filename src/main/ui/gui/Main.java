@@ -24,10 +24,9 @@ public class Main {
         });
         consoleAppThread.start();
 
-        // 在EDT（事件调度线程）中启动GUI应用
         EventQueue.invokeLater(() -> {
             try {
-                StartPage startPage = new StartPage(); // 假设您有一个启动页面叫做StartPage
+                StartPage startPage = new StartPage();
                 startPage.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();

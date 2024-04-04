@@ -98,7 +98,6 @@ public class RemoveBook extends JFrame implements ActionListener {
             text1.setText("");
             text2.setText("");
             text3.setText("");
-            //this.dispose(); // 可选：如果您希望在操作后关闭窗口
         } else {
             JOptionPane.showMessageDialog(this, "Please enter the book's name.", "Error", JOptionPane.ERROR_MESSAGE);
         }
