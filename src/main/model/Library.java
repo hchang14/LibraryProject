@@ -3,7 +3,6 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-import model.Library;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.List;
 //EFFECTS: Library class manages the collection of books
 public class Library implements Writable {
     private List<Book> bookList;
+    private Runnable changeListener;
 
     //EFFECTS: Initialize an empty arrayList
     //MODIFIES: this
@@ -23,19 +23,20 @@ public class Library implements Writable {
     //MODIFIES: this
     public void addBook(Book book) {
         bookList.add(book);
+        notifyListeners();
     }
 
     //REQUIRES: bookList.contains() the book we are trying to remove
     //EFFECTS: remove a book from the library's collection
     //MODIFIES: this
     public boolean removeBook(String name) {
-        for (Book book : bookList) {
-            if (book.getName().equals(name)) {
-                bookList.remove(book);
-                return true;
+        boolean isRemoved = bookList.removeIf(book -> book.getName().equals(name));
+        if (isRemoved) {
+            if (changeListener != null) {
+                changeListener.run();
             }
         }
-        return false;
+        return isRemoved;
     }
 
     //REQUIRES: bookList.contains() the book category we are trying to search
@@ -94,6 +95,18 @@ public class Library implements Writable {
         return bookList;
     }
 
+    //Check whether the book has existed already
+    public boolean isBookExist(Book book) {
+        for (Book existingBook : bookList) {
+            if (existingBook.getName().equals(book.getName())
+                    && existingBook.getAuthor().equals(book.getAuthor())
+                    && existingBook.getCategory().equals(book.getCategory())) {
+                return true;
+            }
+        }
+        return false; // not exist
+    }
+
     //EFFECTS: return the library as a JSON Object
     @Override
     public JSONObject toJson() {
@@ -102,6 +115,7 @@ public class Library implements Writable {
         return json;
     }
 
+    // MODIFIES: this
     // EFFECTS: returns things in this log collection as a JSON array
     private JSONArray booksToJson() {
         JSONArray jsonArray = new JSONArray();
@@ -111,6 +125,20 @@ public class Library implements Writable {
         }
 
         return jsonArray;
+    }
+
+    //EFFECTS: After execution, this instance will have its `changeListener` set to the provided listener.
+    // This listener will be called upon the calling of `notifyListeners()`.
+    public void setChangeListener(Runnable listener) {
+        this.changeListener = listener;
+    }
+
+    //EFFECTS: If `changeListener` has been set (i.e., it is not null), then it is executed.
+     // If `changeListener` is null, this method has no effect.
+    private void notifyListeners() {
+        if (changeListener != null) {
+            changeListener.run();
+        }
     }
 }
 

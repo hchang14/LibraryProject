@@ -10,7 +10,7 @@ public class Book implements Writable {
     private String category;
 
 
-    //Constructs the book(name, author, category)
+    //EFFECTS: Constructs the book(name, author, category)
     public Book(String name, String author, String category) {
         this.name = name;
         this.author = author;
@@ -35,6 +35,7 @@ public class Book implements Writable {
         return "Title: " + this.name + ", Author: " + this.author + ", Category: " + this.category;
     }
 
+    //MODIFIES: this
     // EFFECTS: returns this book as a JSON object
     @Override
     public JSONObject toJson() {

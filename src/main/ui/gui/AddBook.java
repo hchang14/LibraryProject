@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,19 +21,17 @@ public class AddBook extends JFrame implements ActionListener {
     private JTextField text2 = new JTextField();
     private JLabel name3 = new JLabel("Book's Category: ");
     private JTextField text3 = new JTextField();
-    private JTable table;
-    private DefaultTableModel tableModel;
 
-    //     * Constructs the add book page.
-    public AddBook() {
+
+    // EFFECTS: Constructs the add book page.
+    public AddBook(Library library) {
         this.library = library;
         this.setBounds(500, 100, 600, 400);
         this.setTitle("Book Management App");
         this.setBackground(Color.LIGHT_GRAY);
         this.setAlwaysOnTop(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS)); // Use BoxLayout with Y_AXIS orientation
-        // this.setPreferredSize(new Dimension(600, 400));
 
         JPanel p1 = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Center-align components in each panel
         setBookName(p1);
@@ -72,6 +68,8 @@ public class AddBook extends JFrame implements ActionListener {
         p.add(text2);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up the input field for book's category
     private void setBookCategory(JPanel p) {
         text3.setPreferredSize(new Dimension(200, 40));
         text3.setBackground(Color.PINK);
@@ -80,7 +78,7 @@ public class AddBook extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up the input field for book's category
+    // EFFECTS: sets up the button of adding a new book
     private void setAddButton(JPanel p) {
         JButton addButton = new JButton("Add a new book");
         addButton.addActionListener(this);
@@ -94,19 +92,22 @@ public class AddBook extends JFrame implements ActionListener {
         String author = text2.getText();
         String category = text3.getText();
 
-        // Regular expression to allow only letters and spaces
-        String regex = "^[a-zA-Z\\s]+$";
-        if (!name.isEmpty() && !author.isEmpty() && !category.isEmpty()
-                && name.matches(regex) && author.matches(regex) && category.matches(regex)) {
+        if (!name.isEmpty() && !author.isEmpty() && !category.isEmpty()) {
             book = new Book(name, author, category);
-            library.addBook(book); // Add the book to the library
-            // Show a success message
-            JOptionPane.showMessageDialog(this, "Book added successfully.");
-            // Clear text fields after adding the book
-            text1.setText("");
-            text2.setText("");
-            text3.setText("");
-            this.dispose();
+            if (library.isBookExist(book)) {
+                JOptionPane.showMessageDialog(this, "This book already exists in the library.");
+                text1.setText("");
+                text2.setText("");
+                text3.setText("");
+            } else {
+                library.addBook(book); // Add the book to the library
+                // Show a success message
+                JOptionPane.showMessageDialog(this, "Book added successfully.");
+                // Clear text fields after adding the book
+                text1.setText("");
+                text2.setText("");
+                text3.setText("");
+            }
         } else {
             // Show an error message if any field is empty
             JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -114,22 +115,10 @@ public class AddBook extends JFrame implements ActionListener {
     }
 
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         addNew();
     }
-
-
-//    // Update the table with the latest data from the library
-//    public void updateTable() {
-//        tableModel.setRowCount(0); // Clear existing data
-//        List<Book> books = library.getBook();
-//        for (Book book : books) {
-//            Object[] rowData = {book.getName(), book.getAuthor(), book.getCategory()};
-//            tableModel.addRow(rowData);
-//        }
-//    }
 
 
 }
