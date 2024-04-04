@@ -149,10 +149,8 @@ public class LibraryTest {
     @Test
     public void testIsBookExist() {
         library.addBook(book1);
-        assertTrue(library.isBookExist(book1));
-        assertEquals("Happy Hour", book1.getName());
-        assertEquals("Jennifer", book1.getAuthor());
-        assertEquals("Humor", book1.getCategory());
+        Book bookWithSameDetails = new Book(book1.getName(), book1.getAuthor(), book1.getCategory());
+        assertTrue(library.isBookExist(bookWithSameDetails));
         assertFalse(library.isBookExist(new Book("Non-Existent", "Author", "Category")));
     }
 
