@@ -147,17 +147,41 @@ public class LibraryTest {
     }
 
     @Test
-    public void testIsBookExist() {
-        library.addBook(book1);
-        Book bookWithSameDetails = new Book(book1.getName(), book1.getAuthor(), book1.getCategory());
-        assertTrue(library.isBookExist(bookWithSameDetails));
-        assertFalse(library.isBookExist(new Book("Non-Existent", "Author", "Category")));
+    void testIsBookExist() {
+        // This should return true since the exact book is in the library.
+        assertTrue(library.isBookExist(book1));
     }
 
     @Test
     public void testBookDoesNotExist() {
+        // Make sure the library is empty before checking for non-existence.
+        assertTrue(library.getBook().isEmpty());
         assertFalse(library.isBookExist(book1));
     }
+
+    @Test
+    public void bookWithExactDetailsExists() {
+        library.addBook(book1);
+        Book bookWithSameDetails = new Book(book1.getName(), book1.getAuthor(), book1.getCategory());
+        assertTrue(library.isBookExist(bookWithSameDetails));
+    }
+
+    @Test
+    public void testBookExistsWithDifferentDetails() {
+        // The library already contains 'book1'.
+        library.addBook(book1);
+
+        // Create books with one detail different from 'book1'.
+        Book bookWithDifferentName = new Book("Different Name", book1.getAuthor(), book1.getCategory());
+        Book bookWithDifferentAuthor = new Book(book1.getName(), "Different Author", book1.getCategory());
+        Book bookWithDifferentCategory = new Book(book1.getName(), book1.getAuthor(), "Different Category");
+
+        // None of these books should exist in the library because at least one detail is different.
+        assertFalse(library.isBookExist(bookWithDifferentName));
+        assertFalse(library.isBookExist(bookWithDifferentAuthor));
+        assertFalse(library.isBookExist(bookWithDifferentCategory));
+    }
+
 
     @Test
     public void testToJsonEmptyLibrary() {
