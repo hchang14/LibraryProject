@@ -2,6 +2,7 @@ package model;
 
 import model.Book;
 import model.Library;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,6 +52,7 @@ public class LibraryTest {
         assertFalse(library.removeBook("Sad Time in China"));
         assertFalse(library.removeBook("Golden feet"));
     }
+
 
     @Test
     public void testBookCategorySuccessfully() {
@@ -113,5 +115,41 @@ public class LibraryTest {
         assertEquals(Double.valueOf(1), categoryCount.get("Category One"));
         assertEquals(Double.valueOf(1), categoryCount.get("Category Two"));
     }
+
+    @Test
+    public void testIsBookExist() {
+        library.addBook(book1);
+        assertTrue(library.isBookExist(book1));
+        assertFalse(library.isBookExist(new Book("Non-Existent", "Author", "Category")));
+    }
+
+    @Test
+    public void testBookDoesNotExist() {
+        assertFalse(library.isBookExist(book1));
+    }
+
+    @Test
+    public void testToJsonEmptyLibrary() {
+        JSONObject json = library.toJson();
+        assertTrue(json.getJSONArray("books").isEmpty());
+    }
+
+    @Test
+    public void testToJsonWithBooks() {
+        library.addBook(book1);
+        JSONObject json = library.toJson();
+        assertEquals(1, json.getJSONArray("books").length());
+        // Further assertions can check the content of the JSON array
+    }
+
+    @Test
+    public void testChangeListenerIsCalled() {
+        final boolean[] listenerCalled = {false}; // Simple flag to track listener call
+        library.setChangeListener(() -> listenerCalled[0] = true);
+
+        library.addBook(book1); // This should trigger the listener
+        assertTrue(listenerCalled[0]);
+    }
+
 
 }
