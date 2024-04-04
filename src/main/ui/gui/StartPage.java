@@ -89,7 +89,7 @@ public class StartPage extends JFrame implements ActionListener {
     }
 
 
-    // EFFECTS: goes to new JFrame page based on user input
+    //EFFECTS: goes to new JFrame page based on user input
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button1) {
