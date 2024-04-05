@@ -13,7 +13,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 
-public class HomePage0 extends JFrame implements ActionListener {
+public class HomePage extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/LibraryFile.json";
     private Library library;
     private JsonWriter jsonWriter;
@@ -23,7 +23,7 @@ public class HomePage0 extends JFrame implements ActionListener {
     private DefaultTableModel model;
 
     // Fields, constructor, and other methods
-    public HomePage0(Library library) {
+    public HomePage(Library library) {
         this.library = library;
         this.jsonWriter = new JsonWriter(JSON_STORE);
 
@@ -39,7 +39,7 @@ public class HomePage0 extends JFrame implements ActionListener {
 
     //  * EFFECTS: Creates and arranges GUI components on the window. Sets up action listeners for buttons.
     private void initGuiComponents() {
-        addButton = new JButton("Add a new data");
+        addButton = new JButton("Add a new book");
         removeButton = new JButton("Remove existing book(s)");
 
         JPanel contentPanel = new JPanel();
@@ -102,7 +102,7 @@ public class HomePage0 extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                int option = JOptionPane.showConfirmDialog(HomePage0.this,
+                int option = JOptionPane.showConfirmDialog(HomePage.this,
                         "Do you want to save your data before quitting?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     saveData();

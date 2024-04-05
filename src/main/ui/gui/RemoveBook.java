@@ -1,5 +1,6 @@
 package ui.gui;
 
+import model.Book;
 import model.Library;
 
 import javax.swing.*;
@@ -86,21 +87,29 @@ public class RemoveBook extends JFrame implements ActionListener {
     // EFFECTS: remove the existing book
     private void removeExist() {
         String name = text1.getText();
+        String author = text2.getText();
+        String category = text3.getText();
 
-        if (!name.isEmpty()) {
-            boolean removed = library.removeBook(name);
-            if (removed) {
+        if (!name.isEmpty() && !author.isEmpty() && !category.isEmpty()) {
+            Book bookToBeRemoved = new Book(name, author, category);
+
+            if (library.isBookExist(bookToBeRemoved)) {
+                library.removeBook(bookToBeRemoved.getName());
                 JOptionPane.showMessageDialog(this, "Book removed successfully.");
             } else {
-                JOptionPane.showMessageDialog(this, "Book not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Book not found.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            // Clear text fields
-            text1.setText("");
-            text2.setText("");
-            text3.setText("");
         } else {
-            JOptionPane.showMessageDialog(this, "Please enter the book's name.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Please enter the book's name, author, and category.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        // Clear text fields
+        text1.setText("");
+        text2.setText("");
+        text3.setText("");
     }
 
 

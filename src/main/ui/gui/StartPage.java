@@ -16,7 +16,6 @@ public class StartPage extends JFrame implements ActionListener {
     private JsonReader jsonReader;
     private JButton button1;
     private JButton button2;
-    //private AddBook add;
     private ImageIcon logo;
     private Image splashLogo;
     private JLabel backgroundLabel;
@@ -104,6 +103,6 @@ public class StartPage extends JFrame implements ActionListener {
             library = new Library();
         }
         this.dispose();
-        new HomePage0(library);
+        new HomePage(library);
     }
 }
