@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 // EFFECTS: runs the first window (StartPage)
 public class StartPage extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/LibraryFile.json";
-    private Library library; // Assuming Library is a class
+    private Library library;
     private JsonReader jsonReader;
     private JButton button1;
     private JButton button2;

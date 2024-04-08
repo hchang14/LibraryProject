@@ -64,3 +64,11 @@ Book: Title: GOOD, Author: James, Category: Arts was added.
 
 Sun Apr 07 22:39:53 PDT 2024
 saved existing book(s).
+
+## Phase4: Test3
+If I had more time to work on the project, one refactoring I might consider 
+is introducing more interfaces to improve the flexibility and maintainability 
+of the design. For example, I could create interfaces such as LibraryListener 
+to decouple the Library class from its listeners, allowing for easier addition 
+of different types of listeners in the future. By using interfaces, I can also 
+promote code reuse and make the system more extensible.

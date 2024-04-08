@@ -16,7 +16,6 @@ public class LibraryManagementConsoleApp {
     private Library library;
     private Scanner scanner;
     private boolean isRunning;
-    private Book book;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 

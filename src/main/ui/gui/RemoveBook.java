@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 //Represents the page where users can remove existing books from the library.
 // * Users can remove an existing book from the library.
 public class RemoveBook extends JFrame implements ActionListener {
+    private  Book bookToBeRemoved;
     private Library library;
     private JLabel name1 = new JLabel("Book's Name: ");
     private JTextField text1 = new JTextField();
@@ -91,7 +92,7 @@ public class RemoveBook extends JFrame implements ActionListener {
         String category = text3.getText();
 
         if (!name.isEmpty() && !author.isEmpty() && !category.isEmpty()) {
-            Book bookToBeRemoved = new Book(name, author, category);
+            bookToBeRemoved = new Book(name, author, category);
 
             if (library.isBookExist(bookToBeRemoved)) {
                 library.removeBook(bookToBeRemoved.getName());
