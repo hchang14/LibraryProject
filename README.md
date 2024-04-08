@@ -31,3 +31,36 @@ This project is of interest to me as it combines my passion for Java programming
 Meanwhile, you can choose "no"-- do not save data or "cancel"-- disappear the pop-up window.
 - You can reload the data of your library by clicking the "Yes, load data" button at the start page.
 - You can create a new library without any saved data by clicking "no, create a new one" button in the start page.
+
+## Phase4: Test2
+Saving data...
+Data saved successfully.
+Sun Apr 07 22:39:07 PDT 2024
+Loaded previous book(s).
+
+Sun Apr 07 22:39:07 PDT 2024
+Book: Title: power of now, Author: eckhart tolle, Category: spritual was added.
+
+Sun Apr 07 22:39:07 PDT 2024
+Book: Title: Seven, Author: Susan, Category: Life was added.
+
+Sun Apr 07 22:39:07 PDT 2024
+Book: Title: Heart, Author: Zandy, Category: Science was added.
+
+Sun Apr 07 22:39:07 PDT 2024
+Book: Title: Bron with red, Author: Owen, Category: Science was added.
+
+Sun Apr 07 22:39:07 PDT 2024
+Book: Title: 3, Author: 4, Category: 5 was added.
+
+Sun Apr 07 22:39:07 PDT 2024
+Book: Title: Love wins all, Author: IU, Category: Romantic was added.
+
+Sun Apr 07 22:39:14 PDT 2024
+Book: Title: 3, Author: 4, Category: 5 was removed.
+
+Sun Apr 07 22:39:49 PDT 2024
+Book: Title: GOOD, Author: James, Category: Arts was added.
+
+Sun Apr 07 22:39:53 PDT 2024
+saved existing book(s).

@@ -1,6 +1,8 @@
 package ui.gui;
 
 import model.Book;
+import model.Event;
+import model.EventLog;
 import model.Library;
 import persistence.JsonWriter;
 
@@ -106,13 +108,22 @@ public class HomePage extends JFrame implements ActionListener {
                         "Do you want to save your data before quitting?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     saveData();
-                    System.exit(0);
+                    printEventLogAndExit();
                 } else if (option == JOptionPane.NO_OPTION) {
-                    System.exit(0);
+                    printEventLogAndExit();
                 }
             }
         });
     }
+
+    private void printEventLogAndExit() {
+        for (Event event : EventLog.getInstance()) {
+            System.out.println(event + "\n");
+        }
+        EventLog.getInstance().clear();
+        System.exit(0);
+    }
+
 
     // EFFECTS: goes to new JFrame page based on user input
     public void actionPerformed(ActionEvent ex) {

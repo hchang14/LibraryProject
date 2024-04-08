@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import model.Library;
 import model.Book;
 
@@ -26,6 +28,7 @@ public class JsonReader {
     public Library read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
+        EventLog.getInstance().logEvent(new Event("Loaded previous book(s)."));
         return parseLibrary(jsonObject);
     }
 

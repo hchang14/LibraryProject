@@ -26,19 +26,32 @@ public class Library implements Writable {
     public void addBook(Book book) {
         bookList.add(book);
         notifyListeners();
+        EventLog.getInstance().logEvent(new Event("Book: " + book + " was added."));
+    }
+
+    //EFFECTS: find book details by its name
+    //MODIFIES: this
+    private Book findBookByName(String name) {
+        for (Book book : bookList) {
+            if (book.getName().equals(name)) {
+                return book;
+            }
+        }
+        return null;
     }
 
     //REQUIRES: bookList.contains() the book we are trying to remove
     //EFFECTS: remove a book from the library's collection
     //MODIFIES: this
     public boolean removeBook(String name) {
-        boolean isRemoved = bookList.removeIf(book -> book.getName().equals(name));
-        if (isRemoved) {
-            if (changeListener != null) {
-                changeListener.run();
-            }
+        Book book = findBookByName(name);
+        if (book != null) {
+            bookList.remove(book);
+            notifyListeners();
+            EventLog.getInstance().logEvent(new Event("Book: " + book + " was removed."));
+            return true;
         }
-        return isRemoved;
+        return false;
     }
 
     //REQUIRES: bookList.contains() the book category we are trying to search
@@ -95,6 +108,7 @@ public class Library implements Writable {
     //EFFECTS: get the list of books in the library
     public List<Book> getBook() {
         return bookList;
+
     }
 
     //Check whether the book has existed already
@@ -136,7 +150,7 @@ public class Library implements Writable {
     }
 
     //EFFECTS: If `changeListener` has been set (i.e., it is not null), then it is executed.
-     // If `changeListener` is null, this method has no effect.
+    // If `changeListener` is null, this method has no effect.
     private void notifyListeners() {
         if (changeListener != null) {
             changeListener.run();

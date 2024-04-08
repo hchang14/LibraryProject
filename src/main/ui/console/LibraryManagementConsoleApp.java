@@ -53,7 +53,6 @@ public class LibraryManagementConsoleApp {
             System.out.println("5. View books of specific author");
             System.out.println("6. Save library to the file");
             System.out.println("7. Load library to the file");
-//            System.out.println("7. Return a book");
             System.out.println("8. Exit");
             console();
         }

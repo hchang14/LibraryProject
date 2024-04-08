@@ -1,6 +1,8 @@
 package ui.console;
 
 
+import model.Event;
+import model.EventLog;
 import ui.console.LibraryManagementConsoleApp;
 
 import java.awt.*;
