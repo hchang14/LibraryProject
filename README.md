@@ -32,7 +32,7 @@ Meanwhile, you can choose "no"-- do not save data or "cancel"-- disappear the po
 - You can reload the data of your library by clicking the "Yes, load data" button at the start page.
 - You can create a new library without any saved data by clicking "no, create a new one" button in the start page.
 
-## Phase4: Test2
+## Phase4: Tesk2
 Saving data...
 Data saved successfully.
 Sun Apr 07 22:39:07 PDT 2024
@@ -65,7 +65,7 @@ Book: Title: GOOD, Author: James, Category: Arts was added.
 Sun Apr 07 22:39:53 PDT 2024
 saved existing book(s).
 
-## Phase4: Test3
+## Phase4: Tesk3
 If I had more time to work on the project, one refactoring I might consider 
 is introducing more interfaces to improve the flexibility and maintainability 
 of the design. For example, I could create interfaces such as LibraryListener 
